@@ -2,12 +2,18 @@ class Animal:
   def __init__(self, name, voice, weight):
     self.name = name
     self.voice = voice
-    self.weight = weight
+    self.weight = int(weight)
   def feed(self, n):
     if n == 1:
       return 'накормлено'
     elif n == 0:
       return 'голодный'
+  def __gt__(self, other):
+    # return weight(self) > weight(other)
+    if self.weight >= other.weight:
+      return int(self.weight) > int(other.weight)
+    else:
+      return False 
 
 class Gus(Animal):
   animal_type = 'гусь'
@@ -15,7 +21,7 @@ class Gus(Animal):
     if e == 1:
       return 'яйца собраны'
 gus_1 = Gus('Серый', 'га-га-га', 7)
-gus_2 = Gus('Белый', 'га-га-га', 7.5)
+gus_2 = Gus('Белый', 'га-га-га', 7)
 
 class Cow(Animal):
   animal_type = 'корова'
@@ -68,3 +74,19 @@ print('Животное', duck_1.name, duck_1.animal_type, duck_1.feed(1), 'и',
 
 print('Вес всех животных:', gus_1.weight + gus_2.weight + cow_1.weight + sheep_1.weight + sheep_2.weight + chicken_1.weight +
 chicken_2.weight + goat_1.weight + goat_2.weight + duck_1.weight, 'кг')
+
+# print(gus_1.__gt__(chicken_2))
+
+list_animals = []
+list_animals.append(gus_1)
+list_animals.append(gus_2)
+list_animals.append(cow_1)
+list_animals.append(sheep_1)
+list_animals.append(sheep_2)
+list_animals.append(chicken_1)
+list_animals.append(chicken_2)
+list_animals.append(goat_1)
+list_animals.append(goat_2)
+list_animals.append(duck_1)
+list_animals.sort()
+print('Самое тяжелое животное - {}'.format(list_animals[9].name))
